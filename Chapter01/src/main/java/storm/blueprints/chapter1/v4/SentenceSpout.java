@@ -1,19 +1,21 @@
 package storm.blueprints.chapter1.v4;
 
-import backtype.storm.spout.SpoutOutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.topology.base.BaseRichSpout;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
+
+import org.apache.storm.spout.SpoutOutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichSpout;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
+import storm.blueprints.utils.Utils;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import storm.blueprints.utils.Utils;
 
 public class SentenceSpout extends BaseRichSpout {
-    
-    
+
+
     private ConcurrentHashMap<UUID, Values> pending;
     private SpoutOutputCollector collector;
     private String[] sentences = {
@@ -29,7 +31,7 @@ public class SentenceSpout extends BaseRichSpout {
         declarer.declare(new Fields("sentence"));
     }
 
-    public void open(Map config, TopologyContext context, 
+    public void open(Map config, TopologyContext context,
             SpoutOutputCollector collector) {
         this.collector = collector;
         this.pending = new ConcurrentHashMap<UUID, Values>();
@@ -47,11 +49,19 @@ public class SentenceSpout extends BaseRichSpout {
         Utils.waitForMillis(1);
     }
 
+    /**
+     * 确认消息然后删除消息
+     * @param msgId
+     */
     public void ack(Object msgId) {
         this.pending.remove(msgId);
     }
 
+    /**
+     * 失败重发
+     * @param msgId
+     */
     public void fail(Object msgId) {
         this.collector.emit(this.pending.get(msgId), msgId);
-    }    
+    }
 }

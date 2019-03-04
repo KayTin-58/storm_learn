@@ -1,9 +1,9 @@
 package storm.blueprints.chapter1.v3;
 
-import backtype.storm.Config;
-import backtype.storm.LocalCluster;
-import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
+
+import org.apache.storm.Config;
+import org.apache.storm.LocalCluster;
+import org.apache.storm.topology.TopologyBuilder;
 import storm.blueprints.chapter1.v1.ReportBolt;
 import storm.blueprints.chapter1.v1.SplitSentenceBolt;
 import storm.blueprints.chapter1.v1.WordCountBolt;

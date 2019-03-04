@@ -1,10 +1,11 @@
 package storm.blueprints.chapter1.v3;
 
+import org.apache.storm.Config;
+import org.apache.storm.LocalCluster;
+import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
 import storm.blueprints.chapter1.v1.*;
-import backtype.storm.Config;
-import backtype.storm.LocalCluster;
-import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
+
 import static storm.blueprints.utils.Utils.*;
 
 public class WordCountTopology {

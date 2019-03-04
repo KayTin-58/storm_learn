@@ -27,15 +27,16 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-core -->
         <dependency>
-            <groupId>storm</groupId>
-            <artifactId>storm</artifactId>
-            <version>0.8.2</version>
-            <!-- keep storm dependencies out of the shaded jar -->
-<!--            <scope>provided</scope>-->
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>1.2.2</version>
+            <scope>provided</scope>
         </dependency>
+
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
